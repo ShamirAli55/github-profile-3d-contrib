@@ -1,26 +1,17 @@
-name: Generate 3D Contribution Graph
+name: GitHub-Profile-3D-Contrib
 
 on:
-  schedule: # runs every day at 00:00 UTC
-    - cron: "0 0 * * *"
-  workflow_dispatch: # lets you run it manually
+  schedule:
+    - cron: "0 0 * * *"   # runs daily at midnight
+  workflow_dispatch:       # allow manual run from Actions tab
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Generate 3D profile contribution graph
+      - name: Generate 3D Contribution Graph
         uses: yoshi389111/github-profile-3d-contrib@0.7.1
         with:
-          USERNAME: ShamirAli55
-
-      - name: Commit & Push
-        run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add -A .
-          git commit -m "generated"
-          git push
+          user_name: ShamirAli55   # 👈 your username here
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
